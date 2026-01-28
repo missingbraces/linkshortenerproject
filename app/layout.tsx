@@ -10,6 +10,8 @@ import {
 } from "@clerk/nextjs";
 import { shadcn } from "@clerk/themes";
 import { Button } from "@/components/ui/button";
+import { Link2 } from "lucide-react";
+import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -33,23 +35,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider appearance={shadcn}>
+    <ClerkProvider 
+      appearance={shadcn}
+      afterSignInUrl="/dashboard"
+      afterSignUpUrl="/dashboard"
+    >
       <html lang="en" className="dark">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <header className="flex items-center justify-end gap-4 p-4 h-16">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <Button variant="ghost">Sign In</Button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <Button>Sign Up</Button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+          <header className="border-b border-zinc-800 bg-zinc-900/50 backdrop-blur">
+            <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+              <Link href="/" className="flex items-center gap-2 text-white hover:text-zinc-300 transition-colors">
+                <Link2 className="w-6 h-6" />
+                <span className="font-semibold text-lg">Link Shortener</span>
+              </Link>
+              
+              <div className="flex items-center gap-4">
+                <SignedOut>
+                  <SignInButton mode="modal">
+                    <Button variant="ghost">Sign In</Button>
+                  </SignInButton>
+                  <SignUpButton mode="modal">
+                    <Button>Sign Up</Button>
+                  </SignUpButton>
+                </SignedOut>
+                <SignedIn>
+                  <UserButton afterSignOutUrl="/" />
+                </SignedIn>
+              </div>
+            </div>
           </header>
           {children}
         </body>
