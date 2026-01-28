@@ -33,7 +33,7 @@ export default async function Home() {
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <SignUpButton mode="modal">
               <Button size="lg" className="text-lg px-8">
-                無料で始める
+                Get Started Free
               </Button>
             </SignUpButton>
           </div>
