@@ -1,16 +1,22 @@
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
+'use client';
+
+import { useEffect } from 'react';
+import { useAuth } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 import { SignUpButton } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link2, BarChart3, Shield, Zap } from 'lucide-react';
 
-export default async function Home() {
-  const { userId } = await auth();
+export default function Home() {
+  const { userId, isLoaded } = useAuth();
+  const router = useRouter();
   
-  if (userId) {
-    redirect('/dashboard');
-  }
+  useEffect(() => {
+    if (isLoaded && userId) {
+      router.push('/dashboard');
+    }
+  }, [isLoaded, userId, router]);
   
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-900 to-black">
