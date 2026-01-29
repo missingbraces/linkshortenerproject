@@ -1,3 +1,7 @@
+---
+description: This file outlines the authentication guidelines for the project using Clerk.
+---
+
 # Authentication
 
 ## Overview

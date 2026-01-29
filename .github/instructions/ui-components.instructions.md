@@ -1,3 +1,7 @@
+---
+description: This file outlines the guidelines for using shadcn/ui components in the project.
+---
+
 # UI Components
 
 ## Overview
